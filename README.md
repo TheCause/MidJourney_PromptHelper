@@ -1,5 +1,7 @@
 data extractions based on "V4 Midjourney Reference Sheets"
 
+/!\ if you have information about the creator of this spreadsheet, please give it to me so that I can inform the users that all the data on which exist thanks to him. 
+
 the idea is to get the data from the google sheet and format them to allow another use (webapp/site etc...)
 
 It is obvious that this procedure does not allow to automate the updates but there are always other ways to do it
@@ -44,8 +46,8 @@ For each of them,
 
 ![[screenshots/Successfully_copied.png]]
 
-- Cliquer sur "Open spreadsheet"
-- Renommer le nouveau "spreadsheet"
+- Click on "Open spreadsheet".
+- Rename the new spreadsheet
 ![[screenshots/rename_spreadsheet.png]]
 
 ## Export each document in HTML format
