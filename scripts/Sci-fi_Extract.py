@@ -46,12 +46,12 @@ df = df.iloc[1:]
 
 data = []
 for i, row in df.iterrows():
-    artiste = row[df.columns[0]]
+    artist = row[df.columns[0]]
     for j in range(1, len(df.columns)):
         prompt = df.columns[j]
         url = row[j]
         if "https" in url:
-            data.append({'artiste': artiste, 'prompt': prompt, 'url': url})
+            data.append({'artist': artist, 'prompt': prompt, 'url': url})
 
 json_data = json.dumps(data)
 
