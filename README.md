@@ -8,10 +8,15 @@ It is obvious that this procedure does not allow to automate the updates but the
 
 ## Preamble
 Not knowing how to manipulate programmatically google sheets and considering the size of this one, I preferred :
+
 1 - create a new document per tab (manually, about 20 minutes)
+
 2 - export each document in HTML format (manually, about 20 minutes)
+
 3 - use BeautifulSoup to parse the HTML files (script available and html files in the htmls/ directory)
+
 4 - upload the images (script available and files in the imgs/ directory)
+
 
 ## 1 - Create a new document per tab
 
@@ -65,6 +70,13 @@ The files are in zip format so you just have to unzip them.
 for i in $(ls -1 | sed -e 's/\.zip$//'); do unzip $i.zip -d $i && rm $i.zip; done
 ```
 
+## 3 - use BeautifulSoup to parse the HTML files (script available and html files in the htmls/ directory)
+
+All python scripts for extracting json from html are in ./scripts repository.
+
+I could merge all the scripts into one, but I won't do that for now :p 
+
+/!\ the results are in the .jsons directory
 
 
 ## Sources
