@@ -79,6 +79,12 @@ I could merge all the scripts into one, but I won't do that for now :p
 /!\ the results are in the .jsons directory
 
 
+## 4 - upload the images (script available and files in the imgs/ directory)
+
+use the python script: getimages.py which uploads the images to the imgs directory and creates a unified_local.json file which contains the local urls
+
+The images are not kept in the repository because there are 2946 images for 359M
+
 ## Sources
 
 [V4 Midjourney Reference Sheets](https://docs.google.com/spreadsheets/d/1MsX0NYYqhv4ZhZ7-50cXH1gvYE2FKLixLBvAkI40ha0/edit#gid=448521687) 
