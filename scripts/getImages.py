@@ -11,12 +11,8 @@ if not os.path.exists('imgs'):
 with open('unified.json', 'r') as f:
     json_data = json.load(f)
 
-# Load existing data from unified_local.json
-try:
-    with open('unified_local.json', 'r') as f:
-        existing_data = json.load(f)
-except FileNotFoundError:
-    existing_data = []
+# Initialize existing data
+existing_data = []
 
 # Loop through data items and retrieve image links
 for item in json_data:
@@ -32,6 +28,9 @@ for item in json_data:
     # Check if the file has already been downloaded
     if os.path.exists(filepath):
         print(f'{filename} already exists, skipping...')
+        new_item = item.copy()
+        new_item['url'] = os.path.relpath(filepath, '.')
+        existing_data.append(new_item)
         continue
     try:
         # Download the image using urllib.request.urlretrieve
