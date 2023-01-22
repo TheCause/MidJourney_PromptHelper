@@ -83,7 +83,7 @@ I could merge all the scripts into one, but I won't do that for now :p
 
 use the python script: getimages.py which uploads the images to the imgs directory and creates a unified_local.json file which contains the local urls
 
-The images are not kept in the repository because there are 2946 images for 359M
+The images are not kept in the repository because there are 3031 images for 367M
 
 ## Sources
 
