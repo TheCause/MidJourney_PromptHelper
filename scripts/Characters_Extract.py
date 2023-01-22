@@ -51,11 +51,12 @@ df.fillna(value='No Value', inplace=True)
 data = []
 for i, row in df.iterrows():
     artist = " ".join(row[df.columns[0]].replace('\n', '').split())
+    category = "Characters"
     for j in range(1, len(df.columns)):
         prompt = df.columns[j]
         url = row[j]
         if "https" in url:
-            data.append({'artist': artist, 'prompt': prompt, 'url': url})
+            data.append({'artist': artist, 'prompt': prompt, 'url': url, 'category': category})
 
 json_data = json.dumps(data)
 

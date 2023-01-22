@@ -45,11 +45,12 @@ df = df.iloc[1:]
 data = []
 for i, row in df.iterrows():
     medium = row[df.columns[0]]
+    category = "Mediums, Techniques"
     for j in range(1, len(df.columns)):
         prompt = df.columns[j]
         url = row[j]
         if "https" in url:
-            data.append({'medium': medium, 'prompt': prompt, 'url': url})
+            data.append({'medium': medium, 'prompt': prompt, 'url': url, 'category': category})
 
 json_data = json.dumps(data)
 

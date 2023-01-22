@@ -49,11 +49,12 @@ data = []
 for i, row in df.iterrows():
     artist = " ".join(row[df.columns[0]].replace('\n', '').split())
     unique_prompt = row[df.columns[2]]
+    category = "Misc"
     for j in range(1, len(df.columns)):
         prompt = df.columns[j]
         url = row[j]
         if "https" in url:
-            data.append({'artist': artist, 'prompt': prompt, 'unique_prompt': unique_prompt, 'url': url})
+            data.append({'artist': artist, 'prompt': prompt, 'unique_prompt': unique_prompt, 'url': url, 'category': category})
 
 json_data = json.dumps(data)
 

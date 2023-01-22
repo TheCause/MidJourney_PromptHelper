@@ -1,50 +1,55 @@
+# script for unifying json files
+
 import json
 import os
-import re
-import urllib.request
+import sys
 
-# Create imgs directory if it doesn't already exist
-if not os.path.exists('imgs'):
-    os.makedirs('imgs')
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python json_unifier.py <path_to_json_files>")
+        sys.exit(1)
 
-# Load JSON file using json.load()
-with open('unified.json', 'r') as f:
-    json_data = json.load(f)
+    path = sys.argv[1]
+    if not os.path.exists(path):
+        print("Path does not exist")
+        sys.exit(1)
 
-# Load existing data from unified_local.json
-try:
-    with open('unified_local.json', 'r') as f:
-        existing_data = json.load(f)
-except FileNotFoundError:
-    existing_data = []
+    if not os.path.isdir(path):
+        print("Path is not a directory")
+        sys.exit(1)
 
-# Loop through data items and retrieve image links
-for item in json_data:
-    url = item['url']
-    # Create a filename from the other keys of the data item
-    filename = ''
-    for key, value in item.items():
-        if key != 'url':
-            filename += value.replace(' ', '_') + '_'
-    filename = re.sub(r'[^\w_]', '', filename) + '.png'
-    # Create a full filepath to save the image
-    filepath = os.path.join('imgs', filename)
-    # Check if the file has already been downloaded
-    if os.path.exists(filepath):
-        print(f'{filename} already exists, skipping...')
-        continue
-    try:
-        # Download the image using urllib.request.urlretrieve
-        urllib.request.urlretrieve(url, filepath)
-        print(f'{filename} downloaded successfully')
-    except urllib.error.URLError as e:
-        print(f'An error occurred while downloading {filename}: {e.reason}')
-    except urllib.error.HTTPError as e:
-        print(f'An error occurred while downloading {filename}: {e.reason}')
-    new_item = item.copy()
-    new_item['url'] = os.path.relpath(filepath, '.')
-    existing_data.append(new_item)
+    files = os.listdir(path)
+    if len(files) == 0:
+        print("Directory is empty")
+        sys.exit(1)
 
-# Save the updated data to unified_local.json file
-with open('unified_local.json', 'w') as f:
-    json.dump(existing_data, f)
+    data = []
+    for file in files:
+        with open(path + "/" + file) as f:
+            data += json.load(f)
+
+    # Create a new variable to store the cleaned data
+    cleaned_data = []
+
+    # Loop through the data elements and clean up the prompt keys
+    for item in data:
+        prompt = item['prompt']
+        if prompt is None:
+            continue
+        # Replacing the '\"' characters with nothing
+        prompt = prompt.replace('"', '')
+        # Replacing the '\n' characters with nothing
+        prompt = prompt.replace('\n', '')
+        # Replacing multiple spaces with a single space
+        prompt = ' '.join(prompt.split())
+        item['prompt'] = prompt
+        cleaned_data.append(item)
+
+    # replace the data with the cleaned data
+    data = cleaned_data
+
+    with open("unified.json", "w") as f:
+        json.dump(data, f)
+
+if __name__ == "__main__":
+    main()

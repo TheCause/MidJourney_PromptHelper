@@ -57,6 +57,7 @@ for i in range(1, len(df_transposed.columns)):
         data["style"] = style
         data["prompt"] = prompt[j]
         data["url"] = df_transposed.iloc[j, i]
+        data["category"] = "Styles"
         if "https" in data["url"]:
             result.append(data)
 

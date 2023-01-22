@@ -50,11 +50,12 @@ for i, row in df.iterrows():
     artist = row[df.columns[0]]
     date_range = row[df.columns[5]]
     location = row[df.columns[6]]
+    categrory = "Paintings"
     for j in range(1, len(df.columns)):
         prompt = df.columns[j]
         url = row[j]
         if "https" in url:
-            data.append({'artist': artist, 'prompt': prompt, 'url': url, 'date_range':date_range, 'location': location })
+            data.append({'artist': artist, 'prompt': prompt, 'url': url, 'date_range':date_range, 'location': location, 'category': categrory })
 
 json_data = json.dumps(data)
 

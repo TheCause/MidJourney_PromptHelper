@@ -63,6 +63,7 @@ for i in range(1, len(df_transposed.columns)):
         data["era"] = era
         data["prompt"] = prompt[j]
         data["url"] = df_transposed.iloc[j, i]
+        data["category"] = "Time Periods Fashion"
         result.append(data)
 
 # Convert the list to json
