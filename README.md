@@ -85,6 +85,73 @@ use the python script: getimages.py which uploads the images to the imgs directo
 
 The images are not kept in the repository because there are 3031 images for 367M
 
+## 5 - json cleaning
+
+comment j'ai fait pour nettoyer le fichier json
+
+## 6 - setting firebase - Optional if you want to used data in web project
+
+Firebase is a real-time back-end development service developed by Google. It offers a variety of features such as database management, authentication, file storage and more. In this tutorial, we will show you how to create a new Firebase.
+
+#### Prerequisites
+
+- An active Google account
+
+#### Access the Firebase console
+
+- Access the Firebase console by logging in with your Google account at [https://console.firebase.google.com/](https://console.firebase.google.com/)
+
+#### Create a new database
+
+- Click on the "Create a Firebase" button
+- Enter a name for your Firebase
+- Select an existing project or create a new project
+- Click on the "Create a database" button
+
+#### Configure authentication
+
+- In the "Authentication" section, click on the "Configure authentication" button
+- Select the desired authentication methods : Google
+- Configure the settings for each selected authentication method
+- Click the "Save" button to save changes
+
+#### Edit Firebase security rules
+
+- Modify Firebase security rules to allow reading and writing for authenticated users
+
+```yaml
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if request.auth != null || !request.auth;
+      allow write, update, delete: if request.auth != null;
+    }
+  }
+}
+```
+
+#### upload & change url
+
+- create firebaseconf.json file with data given https://console.firebase.google.com/project/yourprojectID/settings/serviceaccounts/adminsdk
+
+```json
+{
+    "type": "service_account",
+    "project_id": "Your_Project",
+    "private_key_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "private_key": "-----BEGIN PRIVATE KEY-----xxxxxxxxxxxxxxxx-----END PRIVATE KEY-----\n",
+    "client_email": "",
+    "client_id": "",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/xxxxx"
+  }
+```
+
+- execute : upload2firebase.py for uploading imgs in Firebase Bucket and change URL values in .json file
+- execute : import_json2firebase.py for integrate new json file on Firebase Db
+
 ## Sources
 
 [V4 Midjourney Reference Sheets](https://docs.google.com/spreadsheets/d/1MsX0NYYqhv4ZhZ7-50cXH1gvYE2FKLixLBvAkI40ha0/edit#gid=448521687) 
